@@ -177,6 +177,10 @@ input[type="radio"] {
   box-shadow: 0 2px 2px red;
 }
 
+.summary button:active {
+  transform: translateY(3px);
+}
+
 .summary p {
   margin-top: 1.6em;
   font-size: 2em;

@@ -7,7 +7,8 @@
     <form [formGroup]="insurance">
       <div class="display-large">
         <span class="gray">100</span>
-        <span style="color: red; font-weight: bold; display: inline-block; margin-left: 16px;">{{displayInSpan()}}</span>
+        <span
+          style="color: red; font-weight: bold; display: inline-block; margin-left: 16px;">{{displayInSpan()}}</span>
         <span class="gray">10000</span>
       </div>
       <input type="range" #ranger formControlName="amount" [value]="update()" (input)="update()" min="100" max="10000"
@@ -54,7 +55,7 @@
     </form>
   </div>
   <div class="summary">
-    <button type="submit" (click)="postData()">Oblicz ratę</button>
+    <button type="submit" (click)="postData()">Oblicz składkę</button>
     <span *ngIf="isSubmitted && insurance.get('installment').invalid" style="color: red;">Uzupełnij formularz do
       końca</span>
     <p>{{this.finalAmount? this.finalAmount: 0}}zł</p>
