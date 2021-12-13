@@ -1,41 +1,61 @@
 <div class="container">
-  <h2>Kalkulator</h2>
-  <p>Suma ubezpieczenia</p>
-  <form [formGroup]="insurance">
-    <span>100</span>
-    <input type="range" formControlName="amount" min="100" max="10000" value="5050" step="50">
-    <span>{{this.insurance.value.amount}}</span><br><br>
-    <span>10000</span>
-    <br><br>
-    <p>Ilość rat</p>
-    <div class="form-group">
-      <label>
-        <input type="radio" formControlName="installment" value="0.98">1 rata
-      </label>
-      <label>
-        <input type="radio" formControlName="installment" value="1">2 raty
-      </label>
-      <label>
-        <input type="radio" formControlName="installment" value="1.0">3 raty
-      </label>
-      <label>
-        <input type="radio" formControlName="installment" value="1.04">4 raty
-      </label>
-    </div>
-    <p>Stan</p>
-    <div class="form-group">
-      <label>
-        <input type="radio" formControlName="state" value="0.95">brak szkód
-      </label>
-      <label>
-        <input type="radio" formControlName="state" value="1.08">wyrządzona szkoda
-      </label>
-      <span>Brak wyboru oznacza nowego klienta bez przeszłości</span>
-    </div>
-    <div class="summary">
-      <button type="submit" (click)="postData()">Oblicz ratę</button>
-      <span *ngIf="insurance.get('installment').invalid" style="color: red;">Uzupełnij formularz do końca</span>
-      <p>{{this.finalAmount? this.finalAmount: 0}}zł</p>
-    </div>
-  </form>
+  <div class="heading">
+    <h3>Kalkulator</h3>
+  </div>
+  <div class="form-div">
+    <p>Suma ubezpieczenia</p>
+    <form [formGroup]="insurance">
+      <input type="range" #ranger formControlName="amount" [value]="update()" (input)="update()" min="100" max="10000"
+        step="50">
+      <div class="display-mobile">
+        <div class="display-mobile__range">
+          <span>100</span>
+          <span>10000</span>
+        </div>
+        <div class="display-mobile__setting">
+          <button (click)="decreaseInsVal()" class="arrow-btn left"><i class="fas fa-chevron-left"></i></button>
+          <span style="color: red; font-weight: bold; line-height: 2;">{{displayInSpan()}}</span>
+          <button (click)="increaseInsVal()" class="arrow-btn right"><i class="fas fa-chevron-right"></i></button>
+        </div>
+      </div>
+      <div class="display-large">
+        <span>100</span>
+        <span>{{displayInSpan()}}</span>
+        <span>10000</span>
+      </div>
+      <div class="form-group">
+        <p>Ilość rat</p>
+        <label class="select">
+          <input type="radio" formControlName="installment" value="0.98">1 rata
+        </label>
+        <label>
+          <input class="select" type="radio" formControlName="installment" value="1"><span>2 raty</span>
+        </label>
+        <label>
+          <input class="select" type="radio" formControlName="installment" value="1.0"><span>3 raty</span>
+        </label>
+        <label>
+          <input class="select" type="radio" formControlName="installment" value="1.04"><span>4 raty</span>
+        </label>
+      </div>
+      <div class="form-group">
+        <p>Stan</p>
+        <label>
+          <input class="select" type="radio" formControlName="state" value="0.95">brak szkód
+        </label>
+        <label>
+          <input class="select" type="radio" formControlName="state" value="1.08">wyrządzona szkoda
+        </label>
+      </div>
+      <div class="info">
+        <span style="color: #96b0c5;">Brak wyboru oznacza nowego klienta bez przeszłości</span>
+      </div>
+    </form>
+  </div>
+  <div class="summary">
+    <button type="submit" (click)="postData()">Oblicz ratę</button>
+    <span *ngIf="isSubmitted && insurance.get('installment').invalid" style="color: red;">Uzupełnij formularz do
+      końca</span>
+    <p>{{this.finalAmount? this.finalAmount: 0}}zł</p>
+  </div>
 </div>

@@ -9,9 +9,10 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class AppComponent implements OnInit {
   insurance: FormGroup;
   premiumAmount: number = 130;
-  installmentMultiplier: number | string = '';
-  stateMultiplier: number | string = 0.95;
+  installmentMultiplier: number;
+  stateMultiplier: number = 0.95;
   finalAmount: number;
+  isSubmitted: boolean = false;
 
   ngOnInit() {
     this.insurance = new FormGroup({
@@ -24,28 +25,55 @@ export class AppComponent implements OnInit {
     });
   }
 
+  increaseInsVal() {
+    if (this.insurance.value.amount < 10000) {
+      this.insurance.value.amount++;
+    }
+  }
+  decreaseInsVal() {
+    if (this.insurance.value.amount > 100) {
+      this.insurance.value.amount--;
+    }
+  }
+
+  update() {
+    if (
+      this.insurance.controls['amount'].value !== this.insurance.value.amount
+    ) {
+      this.insurance
+        .get('amount')
+        .setValue(this.insurance.value.amount, { emitEvent: false });
+    }
+    return this.insurance.value.amount;
+  }
+
+  displayInSpan() {
+    let helper = String(this.insurance.value.amount);
+    if (
+      this.insurance.value.amount >= 1000 &&
+      this.insurance.value.amount !== 10000
+    ) {
+      return helper.slice(0, 1) + ' ' + helper.slice(1);
+    }
+    if (this.insurance.value.amount === 10000) {
+      return helper.slice(0, 2) + ' ' + helper.slice(2);
+    }
+    return helper;
+  }
+
   postData() {
-    if (this.insurance.value.amount <= 1000) {
+    this.isSubmitted = true;
+    const insValue: number = this.insurance.value.amount;
+
+    if (insValue <= 1000) {
       this.premiumAmount = 20;
-    } else if (
-      this.insurance.value.amount > 1000 &&
-      this.insurance.value.amount <= 3000
-    ) {
+    } else if (insValue > 1000 && insValue <= 3000) {
       this.premiumAmount = 70;
-    } else if (
-      this.insurance.value.amount > 3000 &&
-      this.insurance.value.amount <= 6000
-    ) {
+    } else if (insValue > 3000 && insValue <= 6000) {
       this.premiumAmount = 130;
-    } else if (
-      this.insurance.value.amount > 6000 &&
-      this.insurance.value.amount <= 9000
-    ) {
+    } else if (insValue > 6000 && insValue <= 9000) {
       this.premiumAmount = 180;
-    } else if (
-      this.insurance.value.amount > 9000 &&
-      this.insurance.value.amount <= 10000
-    ) {
+    } else if (insValue > 9000 && insValue <= 10000) {
       this.premiumAmount = 200;
     }
 

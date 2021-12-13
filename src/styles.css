@@ -1,1 +1,32 @@
-/* You can add global styles to this file, and also import other style files */
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  height: auto;
+  font-family: "Source Sans Pro", sans-serif;
+  background-image: url(../src/assets/img/bg-image-sm.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* MEDIA QUERIES */
+
+@media (max-width: 992px) {
+  /* body {
+    height: 150vh;
+  } */
+}
+
+@media (min-width: 992px) {
+  body {
+    background-image: url(../src/assets/img/bg-image-xl.png);
+  }
+}
