@@ -5,6 +5,11 @@
   <div class="form-div">
     <p>Suma ubezpieczenia</p>
     <form [formGroup]="insurance">
+      <div class="display-large">
+        <span class="gray">100</span>
+        <span style="color: red; font-weight: bold; display: inline-block; margin-left: 16px;">{{displayInSpan()}}</span>
+        <span class="gray">10000</span>
+      </div>
       <input type="range" #ranger formControlName="amount" [value]="update()" (input)="update()" min="100" max="10000"
         step="50">
       <div class="display-mobile">
@@ -18,33 +23,29 @@
           <button (click)="increaseInsVal()" class="arrow-btn right"><i class="fas fa-chevron-right"></i></button>
         </div>
       </div>
-      <div class="display-large">
-        <span>100</span>
-        <span>{{displayInSpan()}}</span>
-        <span>10000</span>
-      </div>
+
       <div class="form-group">
         <p>Ilość rat</p>
-        <label class="select">
-          <input type="radio" formControlName="installment" value="0.98">1 rata
+        <label class="select installments">
+          <input type="radio" formControlName="installment" value="0.98"><span>1 rata</span>
         </label>
-        <label>
-          <input class="select" type="radio" formControlName="installment" value="1"><span>2 raty</span>
+        <label class="select installments">
+          <input type="radio" formControlName="installment" value="1"><span>2 raty</span>
         </label>
-        <label>
-          <input class="select" type="radio" formControlName="installment" value="1.0"><span>3 raty</span>
+        <label class="select installments">
+          <input type="radio" formControlName="installment" value="1.0"><span>3 raty</span>
         </label>
-        <label>
-          <input class="select" type="radio" formControlName="installment" value="1.04"><span>4 raty</span>
+        <label class="select installments">
+          <input type="radio" formControlName="installment" value="1.04"><span>4 raty</span>
         </label>
       </div>
       <div class="form-group">
         <p>Stan</p>
-        <label>
-          <input class="select" type="radio" formControlName="state" value="0.95">brak szkód
+        <label class="select">
+          <input class="select" type="radio" formControlName="state" value="0.95"><span>brak szkód</span>
         </label>
-        <label>
-          <input class="select" type="radio" formControlName="state" value="1.08">wyrządzona szkoda
+        <label class="select">
+          <input class="select" type="radio" formControlName="state" value="1.08"> <span>wyrządzona szkoda</span>
         </label>
       </div>
       <div class="info">

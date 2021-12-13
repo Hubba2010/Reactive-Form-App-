@@ -8,25 +8,23 @@ html {
   font-size: 62.5%;
 }
 
-body {
-  height: auto;
-  font-family: "Source Sans Pro", sans-serif;
-  background-image: url(../src/assets/img/bg-image-sm.png);
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
 /* MEDIA QUERIES */
-
-@media (max-width: 992px) {
-  /* body {
-    height: 150vh;
-  } */
-}
 
 @media (min-width: 992px) {
   body {
     background-image: url(../src/assets/img/bg-image-xl.png);
   }
+
+  html {
+    font-size: 80%;
+  }
+}
+.main {
+  position: relative;
+  font-family: "Source Sans Pro", sans-serif;
+  background-image: url(../src/assets/img/bg-image-xl.png);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
 }
