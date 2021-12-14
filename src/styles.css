@@ -8,6 +8,14 @@ html {
   font-size: 62.5%;
 }
 
+body {
+  background-image: url(../src/assets/img/bg-image-sm.png);
+  background-position: center center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 /* MEDIA QUERIES */
 
 @media (min-width: 992px) {
@@ -18,13 +26,4 @@ html {
   html {
     font-size: 80%;
   }
-}
-.main {
-  position: relative;
-  font-family: "Source Sans Pro", sans-serif;
-  background-image: url(../src/assets/img/bg-image-xl.png);
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  height: 100vh;
 }

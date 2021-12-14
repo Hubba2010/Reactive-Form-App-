@@ -8,8 +8,11 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class AppComponent implements OnInit {
   insurance: FormGroup;
+  // Initial value
   premiumAmount: number = 130;
+  // This is where validator kicks in
   installmentMultiplier: number;
+  // Optional value
   stateMultiplier: number = 0.95;
   finalAmount: number;
   isSubmitted: boolean = false;
@@ -25,6 +28,7 @@ export class AppComponent implements OnInit {
     });
   }
 
+  // Functions to call on arrow button clicks
   increaseInsVal() {
     if (this.insurance.value.amount < 10000) {
       this.insurance.value.amount++;
@@ -40,6 +44,8 @@ export class AppComponent implements OnInit {
     if (
       this.insurance.controls['amount'].value !== this.insurance.value.amount
     ) {
+      // This instruction prevents changing the insurance value
+      // on radio button click when changed the insur. value with arrow btns earlier
       this.insurance
         .get('amount')
         .setValue(this.insurance.value.amount, { emitEvent: false });
@@ -47,8 +53,12 @@ export class AppComponent implements OnInit {
     return this.insurance.value.amount;
   }
 
+  // Function to display insurance amount in a prettier way, for example:
+  // 5050 -> 5 050
+  // 10000 -> 10 000
+
   displayInSpan() {
-    let helper = String(this.insurance.value.amount);
+    const helper = String(this.insurance.value.amount);
     if (
       this.insurance.value.amount >= 1000 &&
       this.insurance.value.amount !== 10000
@@ -61,32 +71,34 @@ export class AppComponent implements OnInit {
     return helper;
   }
 
+  // After clicking submit
   postData() {
     this.isSubmitted = true;
-    const insValue: number = this.insurance.value.amount;
+    const insuranceValue: number = this.insurance.value.amount;
 
-    if (insValue <= 1000) {
+    if (insuranceValue <= 1000) {
       this.premiumAmount = 20;
-    } else if (insValue > 1000 && insValue <= 3000) {
+    } else if (insuranceValue > 1000 && insuranceValue <= 3000) {
       this.premiumAmount = 70;
-    } else if (insValue > 3000 && insValue <= 6000) {
+    } else if (insuranceValue > 3000 && insuranceValue <= 6000) {
       this.premiumAmount = 130;
-    } else if (insValue > 6000 && insValue <= 9000) {
+    } else if (insuranceValue > 6000 && insuranceValue <= 9000) {
       this.premiumAmount = 180;
-    } else if (insValue > 9000 && insValue <= 10000) {
+    } else if (insuranceValue > 9000 && insuranceValue <= 10000) {
       this.premiumAmount = 200;
     }
 
     this.installmentMultiplier = parseFloat(this.insurance.value.installment);
     this.stateMultiplier = parseFloat(this.insurance.value.state);
 
-    console.log('SKŁADKA: ', this.premiumAmount);
-    console.log('MNOŻNIK RATY: ', this.installmentMultiplier);
-    console.log('MNOŻNIK SZKODY: ', this.stateMultiplier);
-
     this.finalAmount = Math.ceil(
       this.premiumAmount * this.stateMultiplier * this.installmentMultiplier
     );
-    console.log(this.finalAmount);
+
+    //  Display all form values values if you want :)
+    /* console.log('SKŁADKA: ', this.premiumAmount);
+    console.log('MNOŻNIK RATY: ', this.installmentMultiplier);
+    console.log('MNOŻNIK SZKODY: ', this.stateMultiplier);
+    console.log('PODSUMOWANIE: ',this.finalAmount); */
   }
 }

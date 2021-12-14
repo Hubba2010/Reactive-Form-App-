@@ -6,10 +6,10 @@
     <p>Suma ubezpieczenia</p>
     <form [formGroup]="insurance">
       <div class="display-large">
-        <span class="gray">100</span>
+        <span class="gray-span">100</span>
         <span
           style="color: red; font-weight: bold; display: inline-block; margin-left: 16px;">{{displayInSpan()}}</span>
-        <span class="gray">10000</span>
+        <span class="gray-span">10000</span>
       </div>
       <input type="range" #ranger formControlName="amount" [value]="update()" (input)="update()" min="100" max="10000"
         step="50">
@@ -19,12 +19,11 @@
           <span>10000</span>
         </div>
         <div class="display-mobile__setting">
-          <button (click)="decreaseInsVal()" class="arrow-btn left"><i class="fas fa-chevron-left"></i></button>
+          <button (click)="decreaseInsVal()"><i class="fas fa-chevron-left"></i></button>
           <span style="color: red; font-weight: bold; line-height: 2;">{{displayInSpan()}}</span>
-          <button (click)="increaseInsVal()" class="arrow-btn right"><i class="fas fa-chevron-right"></i></button>
+          <button (click)="increaseInsVal()"><i class="fas fa-chevron-right"></i></button>
         </div>
       </div>
-
       <div class="form-group">
         <p>Ilość rat</p>
         <label class="select installments">

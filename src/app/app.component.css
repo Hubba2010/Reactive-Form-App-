@@ -2,24 +2,19 @@
 
 .container {
   margin: auto;
+  font-family: "Source Sans Pro", sans-serif;
   font-size: 1.6rem;
   max-width: 900px;
   border-radius: 8px;
   border: 1px solid #222;
   overflow-x: hidden;
-  overflow-y: scroll;
   background-color: #222;
 }
 
 .form-div {
   background-color: white;
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
+  border-radius: 8px 8px 0 0;
   padding: 1.7em 1.3em;
-}
-
-.summary {
-  background-color: #e7f4ff;
 }
 
 /* HEADING */
@@ -35,7 +30,7 @@ h3 {
   font-weight: normal;
 }
 
-/* Slider Input */
+/* SLIDER INPUT */
 
 input[type="range"] {
   margin-top: 20px;
@@ -64,6 +59,8 @@ input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
   margin-top: -5px;
 }
+
+/* MOBILE FIRST! */
 
 .display-mobile .display-mobile__range {
   font-size: 0.8em;
@@ -104,10 +101,14 @@ input[type="range"]::-webkit-slider-thumb {
   flex-direction: column;
 }
 
+/* ARROW BUTTONS */
+
 .fas {
   color: #96b0c5;
   font-size: 1.2em;
 }
+
+/* CUSTOM BUTTONS */
 
 input[type="radio"] {
   display: none;
@@ -123,6 +124,7 @@ input[type="radio"] {
   height: 3em;
   text-align: center;
   line-height: 3em;
+  cursor: pointer;
 }
 
 .form-group .select input[type="radio"]:checked + span {
@@ -136,6 +138,8 @@ input[type="radio"] {
   z-index: 3;
 }
 
+/* Create pseudoelement on checked radio button */
+
 .form-group .select input[type="radio"]:checked + span::after {
   display: flex;
   content: "";
@@ -147,6 +151,8 @@ input[type="radio"] {
   transform: translateY(-40px);
 }
 
+/* INFORMATION */
+
 .info {
   margin: 0 auto;
   margin-top: 10px;
@@ -155,7 +161,10 @@ input[type="radio"] {
   text-align: center;
 }
 
+/* SUMMARY */
+
 .summary {
+  background-color: #e7f4ff;
   padding: 1.7em 1.3em;
 }
 
@@ -167,13 +176,14 @@ input[type="radio"] {
   background: rgb(0, 92, 64);
   background: linear-gradient(
     94deg,
-    rgba(0, 92, 64, 1) 47%,
+    rgb(0, 110, 92) 47%,
     rgba(178, 212, 8, 1) 100%
   );
   text-transform: uppercase;
   color: white;
   font-weight: bold;
   letter-spacing: 1px;
+  cursor: pointer;
   box-shadow: 0 2px 2px red;
 }
 
@@ -219,7 +229,7 @@ input[type="radio"] {
     display: flex;
     justify-content: space-between;
   }
-  .gray {
+  .gray-span {
     color: #839db3;
     font-size: 1em;
   }
