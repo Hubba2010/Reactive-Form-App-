@@ -11,8 +11,8 @@ export class AppComponent implements OnInit {
   // Initial value
   premiumAmount: number = 130;
   // This is where validator kicks in
-  installmentMultiplier: number;
-  // Optional value
+  installmentAmount: number;
+  // Optional value - 0.95 is default
   stateMultiplier: number = 0.95;
   finalAmount: number;
   isSubmitted: boolean = false;
@@ -20,10 +20,7 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.insurance = new FormGroup({
       amount: new FormControl(5050, Validators.required),
-      installment: new FormControl(
-        this.installmentMultiplier,
-        Validators.required
-      ),
+      installment: new FormControl(this.installmentAmount, Validators.required),
       state: new FormControl(this.stateMultiplier),
     });
   }
@@ -74,7 +71,15 @@ export class AppComponent implements OnInit {
   // After clicking submit
   postData() {
     this.isSubmitted = true;
+
+    if (!this.insurance.value.installment) return;
+
+    this.installmentAmount = parseFloat(this.insurance.value.installment);
+    this.stateMultiplier = parseFloat(this.insurance.value.state);
+
     const insuranceValue: number = this.insurance.value.amount;
+    const installments: number = this.installmentAmount;
+    let multiplier: number;
 
     if (insuranceValue <= 1000) {
       this.premiumAmount = 20;
@@ -88,17 +93,35 @@ export class AppComponent implements OnInit {
       this.premiumAmount = 200;
     }
 
-    this.installmentMultiplier = parseFloat(this.insurance.value.installment);
-    this.stateMultiplier = parseFloat(this.insurance.value.state);
+    switch (installments) {
+      case 1:
+        multiplier = 0.98;
+        break;
+      case 2:
+        multiplier = 1;
+        break;
+      case 3:
+        multiplier = 1;
+        break;
+      case 4:
+        multiplier = 1.04;
+        break;
+    }
 
-    this.finalAmount = Math.ceil(
-      this.premiumAmount * this.stateMultiplier * this.installmentMultiplier
+    const totalPremium = Math.ceil(
+      this.premiumAmount * this.stateMultiplier * multiplier
+    );
+
+    this.finalAmount = parseFloat(
+      (totalPremium / this.installmentAmount).toFixed(2)
     );
 
     //  Display all form values values if you want :)
-    /* console.log('SKŁADKA: ', this.premiumAmount);
-    console.log('MNOŻNIK RATY: ', this.installmentMultiplier);
+    console.log('SKŁADKA PODSTAWOWA: ', this.premiumAmount);
+    console.log('ILOŚĆ RAT: ', this.installmentAmount);
+    console.log('MNOŻNIK RATY: ', multiplier);
     console.log('MNOŻNIK SZKODY: ', this.stateMultiplier);
-    console.log('PODSUMOWANIE: ',this.finalAmount); */
+    console.log('SKŁADKA CAŁKOWITA: ', totalPremium);
+    console.log('RATA: ', this.finalAmount);
   }
 }

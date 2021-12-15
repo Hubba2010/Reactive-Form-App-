@@ -27,16 +27,16 @@
       <div class="form-group">
         <p>Ilość rat</p>
         <label class="select installments">
-          <input type="radio" formControlName="installment" value="0.98"><span>1 rata</span>
+          <input type="radio" formControlName="installment" value="1"><span>1 rata</span>
         </label>
         <label class="select installments">
-          <input type="radio" formControlName="installment" value="1"><span>2 raty</span>
+          <input type="radio" formControlName="installment" value="2"><span>2 raty</span>
         </label>
         <label class="select installments">
-          <input type="radio" formControlName="installment" value="1.0"><span>3 raty</span>
+          <input type="radio" formControlName="installment" value="3"><span>3 raty</span>
         </label>
         <label class="select installments">
-          <input type="radio" formControlName="installment" value="1.04"><span>4 raty</span>
+          <input type="radio" formControlName="installment" value="4"><span>4 raty</span>
         </label>
       </div>
       <div class="form-group">
@@ -54,7 +54,7 @@
     </form>
   </div>
   <div class="summary">
-    <button type="submit" (click)="postData()">Oblicz składkę</button>
+    <button type="submit" (click)="postData()">Oblicz ratę</button>
     <span *ngIf="isSubmitted && insurance.get('installment').invalid" style="color: red;">Uzupełnij formularz do
       końca</span>
     <p>{{this.finalAmount? this.finalAmount: 0}}zł</p>
